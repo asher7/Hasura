@@ -25,3 +25,53 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+
+
+Install
+npm i graphql
+npm i -D typescript
+npm i -D @graphql-codegen/cli
+npm i -D @graphql-codegen/typescript
+npm i -D @graphql-codegen/typescript-operations
+npm i -D @graphql-codegen/typescript-apollo-angular
+
+Configure the plugin
+Create or update your codegen.ts file as follows:
+
+-----------------------------------------------------------------------------------------------------------
+
+codegen.ts
+
+import type { CodegenConfig } from '@graphql-codegen/cli'
+ 
+const config: CodegenConfig = {
+  schema: 'http://my-graphql-api.com/graphql',
+  documents: './src/**/*.ts',
+  generates: {
+    './graphql/generated.ts': {
+      plugins: ['typescript', 'typescript-operations', 'typescript-apollo-angular']
+    }
+  }
+}
+export default config
+-----------------------------------------------------------------------------------------------------------
+
+Run the codegen and update your code
+Assuming that, as recommended, your package.json has the following script:
+
+-----------------------------------------------------------------------------------------------------------
+
+package.json
+
+{
+  "scripts": {
+    "generate": "graphql-codegen"
+  }
+}
+Running the following generates the graphql/generated.ts file.
+
+-----------------------------------------------------------------------------------------------------------
+NPM inatall
+-----------
+npm run generate
