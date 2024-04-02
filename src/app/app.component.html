@@ -1,0 +1,39 @@
+<main>
+  <h1>Tasks</h1>
+  <section class="list">
+    <mat-card class="card">
+        @for (task of tasks$ | async; track task.id) {
+          <mat-card-header>
+            <mat-card-title>{{task.title}}</mat-card-title>
+            <mat-card-subtitle>{{task.user.fullName}}</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <p>
+             {{task.description}}
+            </p>
+          </mat-card-content>
+        } @empty {
+          Empty list of users
+        }
+    </mat-card>
+  </section>
+</main>
+
+<form class="example-form" [formGroup]="form" style="justify-content: center; align-items: center;">
+  <mat-form-field class="example-full-width">
+    <mat-label>Title</mat-label>
+    <input type="text" matInput formControlName="title" >
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <mat-label>Description</mat-label>
+    <input type="text" matInput formControlName="description" placeholder="">
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <mat-label>Full Name</mat-label>
+    <input type="text" matInput formControlName="fullName">
+  </mat-form-field>
+  <button type="submit" mat-flat-button color="primary" (click)="onSubmit()">Submit </button>
+</form>
+
+
+<!-- <router-outlet></router-outlet> -->

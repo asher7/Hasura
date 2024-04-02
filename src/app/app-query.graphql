@@ -1,0 +1,31 @@
+query Tasks {
+    tasks {
+      id
+      title
+      description
+      user_id
+      user {
+        id
+        fullName
+      }
+    }
+  }
+
+   mutation MyMutation($title: name!, $description: String!, $fullName: name!) {
+    insert_tasks(objects: {
+      title: $title,
+      description: $description,
+      user: {data: {fullName: $fullName}}
+    }) {
+      returning {
+        id
+        title
+        description
+        user_id
+        user {
+          id
+          fullName
+        }
+      }
+    }
+  }
